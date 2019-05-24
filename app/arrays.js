@@ -85,7 +85,6 @@ define(function() {
       let indexBank = [], lastIndex = 0
       for (; lastIndex < arr.length - 1 ; lastIndex++) {
         let currentIndex = arr.indexOf(target, lastIndex)
-        console.log(currentIndex)
         if (currentIndex > -1) {
           indexBank.push(currentIndex)
           lastIndex = currentIndex
