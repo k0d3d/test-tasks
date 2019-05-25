@@ -28,7 +28,7 @@ define(function() {
       return telX.test(str)
     },
     isUSD : function(str) {
-      let isUsd = /^\$([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9][0-9])?$/g
+      let isUsd = /^(\$)((\d+)|(\d{1,3})(\,\d{3})*)(\.\d{2})?$/g
       return isUsd.test(str)
     }
   };
