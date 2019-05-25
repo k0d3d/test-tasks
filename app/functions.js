@@ -3,39 +3,48 @@ if (typeof define !== 'function') { var define = require('amdefine')(module); }
 define(function() {
   return {
     argsAsArray : function(fn, arr) {
-
+      return fn(...arr)
     },
 
     speak : function(fn, obj) {
-
+      return fn.call(obj)
     },
 
-    functionFunction : function(str) {
-
+    functionFunction : (greeting) => (name) => {
+      return `${greeting}, ${name}`
     },
 
     makeClosures : function(arr, fn) {
+      return arr.map(m => () => fn(m))
+    },
+
+    partial : function(fn, greeting, name) {
+      return (punct) => {
+        return fn(greeting, name, punct)
+      }
 
     },
 
-    partial : function(fn, str1, str2) {
-
+    useArguments : function(...args) {
+      return args.reduce( (p, c) => p + c)
     },
 
-    useArguments : function() {
-
+    callIt : function(fn, ...thisArgs) {
+      return fn.apply(null, thisArgs)
     },
 
-    callIt : function(fn) {
-
-    },
-
-    partialUsingArguments : function(fn) {
-
+    partialUsingArguments : function(fn, ...ttop) {
+      
+      return (...thisArgs) => {
+        return fn.apply(null, ttop.concat(thisArgs))
+      }
     },
 
     curryIt : function(fn) {
-
+      var curry =  (fn, ...args) => (fn.length <= args.length) ?
+        fn(...args) :
+        (...more) => curry(fn, ...args, ...more)
+      return curry
     }
   };
 });
