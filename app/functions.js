@@ -40,10 +40,16 @@ define(function() {
       }
     },
 
-    curryIt : function(func) {
-      var curry =  (fn, ...args) => (fn.length <= args.length) ?
-        func(...args) :
-        (...more) => curry(fn, ...args, ...more)
+    curryIt : function curryIt (func) {
+      var curry =  (fn, ...args) => {
+        args.push(fn)
+        let y = (func.length === args.length) ? 
+          func(...args) :
+          (n) => {
+            return curry(n, ...args)
+          }
+        return y
+      }
       return curry
     }
   };
