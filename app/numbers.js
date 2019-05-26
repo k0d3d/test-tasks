@@ -3,7 +3,10 @@ if (typeof define !== 'function') { var define = require('amdefine')(module); }
 define(function() {
   return {
     valueAtBit: function(num, bit) {
-
+      let n = num.toString(2)
+      return bit > n.length 
+      ? 0 
+      : parseInt(n.toString(2)[n.length - bit])
     },
 
     base10: function(str) {
